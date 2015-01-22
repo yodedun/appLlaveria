@@ -1,0 +1,4 @@
+[10-Feb-2014 02:06:48 America/Bogota] PHP Notice:  Undefined variable: Recordset1 in /home/grupoext/public_html/pagsExtrema/miura_new/superadministrador/add_distribuidores.php on line 158
+[10-Feb-2014 02:06:48 America/Bogota] PHP Warning:  mysql_free_result() expects parameter 1 to be resource, null given in /home/grupoext/public_html/pagsExtrema/miura_new/superadministrador/add_distribuidores.php on line 158
+[21-Mar-2014 01:04:08 America/Bogota] PHP Notice:  Undefined variable: Recordset1 in /home/grupoext/public_html/pagsExtrema/progMiura/superadministrador/list_user.php on line 156
+[21-Mar-2014 01:04:08 America/Bogota] PHP Warning:  mysql_free_result() expects parameter 1 to be resource, null given in /home/grupoext/public_html/pagsExtrema/progMiura/superadministrador/list_user.php on line 156

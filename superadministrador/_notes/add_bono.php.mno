@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_consultaCategoria" value="name:idCategoria;datatype:int,name:strdescripcion;datatype:string" />
+	<infoitem key="UD_consultaPeriodo" value="name:idPeriodo;datatype:int,name:strDescripcion;datatype:string,name:dateComienzo;datatype:date,name:dateFin;datatype:date,name:intActivo;datatype:int" />
+</info>

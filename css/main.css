@@ -1,0 +1,526 @@
+
+
+/* ==========================================================================
+   Johnny escudero j.escudero@kol3.com
+   ========================================================================== */
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,700);
+
+.navbar.navbar-default.navbar-fixed-top {
+background: rgba(0, 152, 95, 1);
+}
+.navbar-default .navbar-brand {
+color: #FFF;
+}
+.navbar-default .navbar-nav>li>a {
+color: #FFF;
+border-bottom: 3px solid rgba(0, 152, 95, 1);
+}
+.navbar-default {border:none}
+.navbar .navbar-nav>.active>a {
+background-color: rgba(27, 124, 88, 1);
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+color: #FFF;
+background: rgba(27, 124, 88, 1);
+border-bottom: 3px solid #fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+color: #FFF;
+background-color: rgba(27, 124, 88, 1);
+border-bottom: 3px solid rgba(27, 124, 88, 1);
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+color: #FFF;}
+
+body {
+background: #fff url(../img/back2.gif) 100% bottom no-repeat;
+background-size: 100% 100%;
+background-position: 0px 54px;
+font-family: 'Cabin', sans-serif;
+padding-bottom: 0px!important;
+font-size: 15px;}
+.table{
+	background:#fff}
+
+.miuralogo, .miuralogin{
+	margin-top:30px;}
+.jumbotron {
+	background: #fff;
+}
+.personaje{
+	position: absolute;
+width: 375PX;
+top: -25PX;
+left: -6px;
+}
+.logviejo{
+	position: relative;
+	top: 127px;
+	z-index: 22;
+	left: -20px;
+}
+.text1{
+	
+	text-align: center;
+	font-size: 15px;
+}
+.login1{
+	margin-top: 20px;
+}
+.form-control, input {
+	background-color: #fff;
+}
+.hiden{
+  display: none;
+}
+.tableStick{
+  top: 543px;
+position: relative;
+width: 100%;
+z-index: 9999;
+}
+#sticktable-sticky-wrapper, #sticktable_wrapper{
+  height: 0px !important;
+}
+#sticktable-sticky-wrapper{
+  top: 263px;
+  position: relative;
+}
+#sticktable_wrapper{
+  position: relative;
+  z-index: 999;
+}
+#sticktable .interior{
+  margin-top: 0px;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+z-index: 2;
+color: #FFF;
+cursor: default;
+background-color: rgba(0, 152, 95, 1);
+border-color: rgba(0, 152, 95, 1);
+}
+
+.btn a{
+	color: #fff;
+}
+a {
+	color: #4CA753;
+}
+.navbar a{
+	color:#fff;}
+footer{
+	color:#fff;}
+
+
+
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: rgba(255, 255, 255, 0.9);
+    
+  }
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+
+
+
+.carousel {
+  height: 100vh !important;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 100vh !important;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  min-width: inherit;
+  max-width: inherit;
+  height: 100vh!important;
+}
+
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  /* Remove the edge padding needed for mobile */
+  .marketing {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left:  15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left:  0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+ 
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+
+.carrusel1{
+	padding: 0px;
+
+}
+
+.loginhome{
+	margin-top: 40px;
+}
+
+.logohome{
+	text-align: center;
+}
+
+
+.carousel-caption {
+position: absolute;
+right: 15%;
+bottom: 20px;
+left: 41%;
+z-index: 10;
+padding-top: 20px;
+padding-bottom: 20px;
+color: #FFF;
+text-align: right;}
+
+.interior{
+  margin-top: 30px;
+}
+
+.panel-heading {
+padding: 10px 15px;
+border-bottom: 1px solid rgba(0, 0, 0, 0);
+border-top-right-radius: 0px;
+border-top-left-radius: 0px;
+}
+
+.panel, .btn {
+
+border-radius: 0px;
+}
+.btn-success {
+background: rgba(0, 152, 95, 1);
+border: 1px solid rgba(0, 152, 95, 1);
+color: #fff;
+}
+
+.btn-rojo {
+background: rgba(232, 17, 45, 1);
+border: 1px solid rgba(232, 17, 45, 1);
+color: #fff;
+}
+.btn-success a{
+  color: #fff;
+}
+.btn-success:hover {
+  background: rgba(27, 124, 88, 1);
+}
+.btn-success:hover a{
+  color: #fff;
+}
+.btn-success a:hover{
+ text-decoration: none;
+}
+.btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+text-shadow: none;
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+
+
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+background-color: #F1F1F1;
+}
+.panel-default>.panel-heading{
+  background: #6c6f70;
+  color: #FFF;
+}
+
+.textsmall{
+  font-size: 11px;
+}
+
+.copy{
+  text-align: center;
+}
+.panel {
+  border:none;
+box-shadow: 0 0px 6px rgba(24, 24, 24, 0.65);
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+font-family: Cabin, sans-serif;
+font-weight: 500;
+line-height: 1.1;
+}
+
+.inlineBlock{
+  display: inline-block;
+}
+
+.panel-heading h3{
+  margin: 5px 0px;
+}
+.barras{
+  background: url(../img/barrasDow.png) #fff left top no-repeat;
+  width: 100%;
+  height: 252px;
+  position: relative;
+  border-top: 6px solid #149968;
+}
+.forLogo{
+  background: #fff;
+  display: inline-block;
+width: 100%;
+}
+.logfooter{
+  margin-left: 49px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  float: left;
+display: inline-block;
+  }
+
+.slogan{
+  margin-right: 38px;
+margin-top: 23px;
+font-family: times New Roman;
+color: #929292;
+font-style: italic;
+}
+.blanco{
+  background: #fff !important;
+  min-height: 68px;
+}
+
+.blanco a{
+  padding: 0px;
+}
+
+
+.top2{
+  top: 67px !important; 
+  z-index: 1030;
+}
+.mobil{
+  display: none!important; 
+}
+
+div.dataTables_filter input {
+width: 100%!important;
+}
+
+@media screen and (max-width:479px) {
+
+.top2 {
+top: 95px !important;
+z-index: 1030;
+}
+
+.slogan {
+float: left!important;
+margin-top: 1px;
+margin-left: 12px;
+font-size: 12px;
+margin-bottom: 8px;
+}
+
+.logohome {
+display:none;
+}
+.sideL {
+position: relative;
+bottom: 0px;
+z-index: 20;
+width: 100%;
+background: #00985F;
+margin: 0px;
+}
+
+#login label{
+  color: #ffffff;
+}
+
+#login .btn-success{
+  background: #ffffff;
+  color: #00985F;
+  width: 100%;
+}
+.barras {
+background-size: 100%;
+height: 115px;
+}
+.mobil{
+  display: block!important; 
+}
+.mobil #login{
+  padding: 0px 16px;
+}
+
+h3, .h3 {
+font-size: 19px;
+}
+
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+.carousel {
+  height: 800px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 800px;
+  background-color: #777;
+}
+
+.carousel-inner > .item > img {  height: 800px;}
+
+}

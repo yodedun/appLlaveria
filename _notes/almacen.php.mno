@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_consultaAlmacen" value="name:segmento;datatype:string,name:strDescripcion;datatype:string,name:ventas;datatype:real,name:intValor;datatype:int,name:intBonouno;datatype:real" />
+	<infoitem key="UD_categoria2" value="name:idPeriodo;datatype:int,name:idCategoria;datatype:int,name:segmento;datatype:string,name:strDescripcion;datatype:string,name:ventas;datatype:real,name:intValor;datatype:int,name:cumplimiento;datatype:real,name:falta1;datatype:real,name:falta2;datatype:real,name:bono;datatype:real,name:ganaria1;datatype:real,name:ganaria2;datatype:real" />
+	<infoitem key="UD_categoria3" value="name:idPeriodo;datatype:int,name:idCategoria;datatype:int,name:segmento;datatype:string,name:strDescripcion;datatype:string,name:ventas;datatype:real,name:intValor;datatype:int,name:cumplimiento;datatype:real,name:falta1;datatype:real,name:falta2;datatype:real,name:bono;datatype:real,name:ganaria1;datatype:real,name:ganaria2;datatype:real" />
+</info>

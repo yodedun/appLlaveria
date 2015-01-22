@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_consultadetalles" value="name:strDocumento;datatype:string,name:strProducto;datatype:string,name:intVenta;datatype:int,name:categoria;datatype:string,name:dateFecha;datatype:date,name:periodo;datatype:string" />
+</info>
