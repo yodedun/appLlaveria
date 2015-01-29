@@ -71,6 +71,7 @@ tbluserlista.idUser=tblventas_llaveria.intUser AND
 metaPeriodo.intUser=tbluserlista.idUser and
 tblventas_llaveria.intUser=tbluser.idUser AND
 tblventas_llaveria.intProducto=tblproductos.codProducto and
+tblproductos.intYear = tblperiodo_llaveria.intYear and
 tblcategorias.idCategoria=8 AND
 tblproductos.intCategoria = tblcategorias.idCategoria AND
 metaPeriodo.idPeriodo=tblperiodo_llaveria.idPeriodo and
@@ -178,6 +179,7 @@ LEFT JOIN (
 		tbluserlista.idUser=tbluser.idUser AND
 		tbluser.idUser = tblmetas_llaveria.intUser
 	AND tblmetas_llaveria.intProducto = tblproductos.codProducto
+	AND tblproductos.intYear = tblperiodo_llaveria.intYear 
 	AND tblproductos.intCategoria=8 
 	AND tblmetas_llaveria.intPeriodo = tblperiodo_llaveria.idPeriodo
 	AND (:dates) BETWEEN tblperiodo_llaveria.dateComienzo

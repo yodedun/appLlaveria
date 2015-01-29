@@ -18,12 +18,12 @@ $(document).ready(function () {
             
 			{
                 aTargets: [0],              // Column number which needs to be modified
-				mDataProp: 'strProducto',
+				mDataProp: 'categoria',
                 sClass  : 'centered-cell'     // Optional - class to be applied to this table cell
             },
 			{
                 aTargets: [ 1 ],              // Column number which needs to be modified
-				mDataProp: 'meta',
+				mDataProp: 'meta2',
                 sClass  : 'centered-cell'     // Optional - class to be applied to this table cell
             },
 

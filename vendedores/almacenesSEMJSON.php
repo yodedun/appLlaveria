@@ -4,75 +4,131 @@ mysql_set_charset('utf8'); ?>
 <?php
 mysql_query("set sql_big_selects=1");
 $sql = "SELECT 
-intUser ,codProducto, CONCAT('$ ',FORMAT(venta, 0)) as venta, strProducto, CONCAT('$ ',FORMAT((meta), 0)) as meta, CONCAT(FORMAT(((uno.venta / dos.meta)*100 ), 0),' %') as porcentaje,
-IF (
-      (
-         uno.venta > dos.meta
-      ),
-      (
-        IF((uno.venta > (dos.meta  * 115) / 100 ),0,CONCAT('Falta $ ',FORMAT((dos.meta  * 115) / 100 - uno.venta, 0),' para el 115% ')) 
-      ),
-      CONCAT('Falta $ ',FORMAT(dos.meta  -  uno.venta, 0),' para el 100% ')
-    ) AS falta1,
-periodo, bono,
-IF (
-(dos.meta > 0),
-(
-	IF (
-(uno.venta > dos.meta ),
-CONCAT('$ ',FORMAT(((bono*uno.venta)/100), 0)),
-0
-) ),0
-) as bonificacion
-
-
+*
 FROM
 (
 SELECT
+tbluser.strUsername,
 tblventas_llaveria.intUser,
-tblventas_llaveria.intProducto as codProducto,
-Sum(tblventas_llaveria.intVenta) as venta
+CONCAT('$ ',FORMAT(Sum(tblventas_llaveria.intVenta), 0)) AS venta,
+CONCAT('$ ',FORMAT(metaSemestres.meta, 0)) as meta2,
+tblperiodo_llaveria.strDescripcion,
+
+    IF (
+      (
+         Sum(tblventas_llaveria.intVenta) > metaSemestres.meta
+      ),
+      (
+        IF((Sum(tblventas_llaveria.intVenta) > (metaSemestres.meta  * 115) / 100 ),0,CONCAT('$ ',FORMAT((metaSemestres.meta  * 115) / 100 -  Sum(tblventas_llaveria.intVenta), 0),' para el 115% ')) 
+      ),
+      CONCAT('$ ',FORMAT(metaSemestres.meta  -  Sum(tblventas_llaveria.intVenta), 0),' para el 100% ')
+    ) AS falta1,
+
+CONCAT(FORMAT((( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ), 0),' %')as porcentaje,
+
+ IF(
+
+tblperiodo_llaveria.idPeriodo=5
+
+,( IF (( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 100 ),
+( IF(( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 115 ),1.5,
+1) ),
+
+0 ))
+
+
+,( IF (( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 100 ),
+( IF(( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 115 ),1.5,
+1) ),
+
+0 ))
+
+
+) as bono,
+ IF(
+
+tblperiodo_llaveria.idPeriodo=5
+
+,( IF (( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 100 ),
+( IF(( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 115 ),(Sum(tblventas_llaveria.intVenta)*0.015),
+(Sum(tblventas_llaveria.intVenta)*0.01)) ),
+
+0 ))
+
+
+,( IF (( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 100 ),
+( IF(( (( Sum(tblventas_llaveria.intVenta) / metaSemestres.meta)*100 ) >= 115 ),CONCAT('$ ',FORMAT((Sum(tblventas_llaveria.intVenta)*0.015), 0)),
+CONCAT('$ ',FORMAT((Sum(tblventas_llaveria.intVenta)*0.01), 0))) ),
+
+0 ))
+
+
+) as bonoPesos,
+tblcategorias.strdescripcion as categoria,
+tblcategorias.idCategoria
 
 FROM
 tblventas_llaveria ,
-tblperiodo_llaveria
+tblperiodo_llaveria ,
+tbluserlista ,
+tbluser,
+tblcategorias ,
+tblproductos,
+metaSemestres
 WHERE
-tblventas_llaveria.intUser=:User AND
-tblventas_llaveria.dateFecha BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND
-NOW() BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND
+tbluserlista.idUser = :User AND
+tbluserlista.idUser=tblventas_llaveria.intUser AND
+metaSemestres.intUser=tbluserlista.idUser and
+tblventas_llaveria.intUser=tbluser.idUser AND
+tblventas_llaveria.intProducto=tblproductos.codProducto and
+tblproductos.intYear = tblperiodo_llaveria.intYear and
+tblcategorias.idCategoria > 8 AND
+tblproductos.intCategoria = tblcategorias.idCategoria AND
+metaSemestres.idPeriodo=tblperiodo_llaveria.idPeriodo and
+metaSemestres.categoria= tblcategorias.idCategoria AND
+NOW() BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND 
+tblventas_llaveria.dateFecha BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin and
 tblperiodo_llaveria.intSemestre=1
 GROUP BY
+tbluser.strUsername,
 tblventas_llaveria.intUser,
-tblventas_llaveria.strCode,
-tblventas_llaveria.intProducto
-
-) AS uno
-RIGHT JOIN (
-SELECT
-tbluser.idUser,
-tblmetas_llaveria.intProducto,
-tblproductos.strProducto,
-tblmetas_llaveria.intValor as meta,
-tblperiodo_llaveria.strDescripcion as periodo,
-VistabonoSEM.bono 
+tblperiodo_llaveria.strDescripcion,
+tblcategorias.strdescripcion,
+tblcategorias.idCategoria
+) as uno
+RIGHT JOIN
+(SELECT
+tbluser.strName,
+tbluser.strZona,
+tblmetas_llaveria.intUser as intUser2,
+tblmetas_llaveria.intCategoria as idcategoria,
+CONCAT('$ ',FORMAT(tblmetas_llaveria.intValor, 0)) AS meta2,
+tblperiodo_llaveria.strDescripcion as strDescripcion2,
+tblcategorias.strdescripcion as categoria
 FROM
-tblmetas_llaveria ,
-tblperiodo_llaveria ,
-tblproductos ,
+tblmetas_llaveria,
+tbluserlista ,
 tbluser,
-VistabonoSEM
+tblperiodo_llaveria,
+tblcategorias
 WHERE
-tbluser.idUser=:User AND
-tbluser.idUser=tblmetas_llaveria.intUser AND
-tblmetas_llaveria.intProducto=tblproductos.codProducto and
+tbluserlista.idUser = :User AND
+tbluserlista.idUser=tblmetas_llaveria.intUser AND
+tblmetas_llaveria.intUser=tbluser.idUser AND
 tblmetas_llaveria.intPeriodo=tblperiodo_llaveria.idPeriodo and
-NOW() BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND
-tblperiodo_llaveria.intSemestre=1 AND
-VistabonoSEM.userId=tbluser.idUser
+tblmetas_llaveria.intCategoria = tblcategorias.idCategoria and
+NOW()  BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND 
+tblperiodo_llaveria.intSemestre=1
+GROUP BY
+tbluser.strName,
+tbluser.strZona,
+tblmetas_llaveria.intUser,
+tblmetas_llaveria.intPeriodo,
+tblperiodo_llaveria.strDescripcion,
+tblcategorias.strdescripcion,
+tblmetas_llaveria.intCategoria)as dos
 
-) AS dos ON uno.intUser= dos.idUser and uno.codProducto = dos.intProducto
-
-";
+ON  uno.intUser= dos.intUser2 and uno.idCategoria = dos.idcategoria";
 
 try {
 	$dbh = new PDO("mysql:host=$hostname_conexionmiura;dbname=$database_conexionmiura", $username_conexionmiura, $password_conexionmiura);	

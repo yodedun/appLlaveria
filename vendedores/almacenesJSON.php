@@ -59,12 +59,16 @@ FROM
 tblmetas_llaveria ,
 tblperiodo_llaveria ,
 tblproductos ,
+tblcategorias,
 tbluser,
 vistabono
 WHERE
 tbluser.idUser=:User AND
 tbluser.idUser=tblmetas_llaveria.intUser AND
 tblmetas_llaveria.intProducto=tblproductos.codProducto and
+tblproductos.intCategoria = tblcategorias.idCategoria and
+tblcategorias.idCategoria = 8 and
+tblproductos.intYear = tblperiodo_llaveria.intYear and
 tblmetas_llaveria.intPeriodo=tblperiodo_llaveria.idPeriodo and
 NOW() BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND
 tblperiodo_llaveria.intSemestre=0 AND

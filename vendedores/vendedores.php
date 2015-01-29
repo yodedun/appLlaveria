@@ -1,4 +1,4 @@
-	<?php require_once('../Connections/conexionmiura.php'); ?>
+<?php require_once('../Connections/conexionmiura.php'); ?>
 <?php
 if (!isset($_SESSION)) {
   session_start();
@@ -44,8 +44,45 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   exit;
 }
 ?>
+<?php
+if (!function_exists("GetSQLValueString")) {
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+{
+  if (PHP_VERSION < 6) {
+    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+  }
 
-    <?php include("headerglobal.php"); ?>
+  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+
+  switch ($theType) {
+    case "text":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;    
+    case "long":
+    case "int":
+      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+      break;
+    case "double":
+      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+      break;
+    case "date":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;
+    case "defined":
+      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+      break;
+  }
+  return $theValue;
+}
+}
+
+mysql_select_db($database_conexionmiura, $conexionmiura);
+$query_consultaPeriodos = "SELECT 	* FROM 	tblperiodo_llaveria WHERE 	tblperiodo_llaveria.dateFin < NOW() AND tblperiodo_llaveria.intSemestre = 0";
+$consultaPeriodos = mysql_query($query_consultaPeriodos, $conexionmiura) or die(mysql_error());
+$row_consultaPeriodos = mysql_fetch_assoc($consultaPeriodos);
+$totalRows_consultaPeriodos = mysql_num_rows($consultaPeriodos);
+?>
+<?php include("headerglobal.php"); ?>
 <body>
 	 <?php include("headervendedor.php"); ?>
 
@@ -74,17 +111,11 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu"> 
+                      <?php do { ?>
                       <li>
-                        <a href="vendedoresTrimestre.php?date=2014-01-01&tri=Trimestre 1 ">Trimestre 1</a></li>
+                        <a href="vendedoresTrimestre.php?date=<?php echo $row_consultaPeriodos['dateComienzo']; ?>&tri=<?php echo $row_consultaPeriodos['strDescripcion']; ?>"><?php echo $row_consultaPeriodos['strDescripcion']; ?></a></li>
                       <li>
-                        <a href="vendedoresTrimestre.php?date=2014-04-01&tri=Trimestre 2">Trimestre 2</a>
-                      </li>
-                      <li>
-                        <a href="vendedoresTrimestre.php?date=2014-07-01&tri=Trimestre 3">Trimestre 3</a>
-                      </li>
-                      <li>
-                        <a href="vendedoresTrimestre.php?date=2014-10-01&tri=Trimestre 4">Trimestre 4</a>
-                      </li>
+                          <?php } while ($row_consultaPeriodos = mysql_fetch_assoc($consultaPeriodos)); ?>
                     </ul>
               </div>
 
@@ -162,3 +193,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
         
     </body>
 </html>
+<?php
+mysql_free_result($consultaPeriodos);
+?>

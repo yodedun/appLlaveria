@@ -65,6 +65,7 @@ WHERE
 tbluser.idUser=:User AND
 tbluser.idUser=tblmetas_llaveria.intUser AND
 tblmetas_llaveria.intProducto=tblproductos.codProducto and
+tblproductos.intYear = tblperiodo_llaveria.intYear and
 tblproductos.intCategoria=8 AND
 tblmetas_llaveria.intPeriodo=tblperiodo_llaveria.idPeriodo and
 (:dates) BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND

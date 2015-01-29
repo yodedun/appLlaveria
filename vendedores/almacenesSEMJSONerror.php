@@ -84,7 +84,7 @@ tblproductos.intYear = tblperiodo_llaveria.intYear and
 tblcategorias.idCategoria > 8 AND
 tblproductos.intCategoria = tblcategorias.idCategoria AND
 metaSemestres.idPeriodo=tblperiodo_llaveria.idPeriodo and
-(:dates) BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND 
+NOW() BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND 
 tblventas_llaveria.dateFecha BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin and
 tblperiodo_llaveria.intSemestre=1
 GROUP BY
@@ -110,7 +110,7 @@ tbluserlista.idUser = :User AND
 tbluserlista.idUser=tblmetas_llaveria.intUser AND
 tblmetas_llaveria.intUser=tbluser.idUser AND
 tblmetas_llaveria.intPeriodo=tblperiodo_llaveria.idPeriodo and
-(:dates)  BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND 
+NOW()  BETWEEN tblperiodo_llaveria.dateComienzo AND tblperiodo_llaveria.dateFin AND 
 tblperiodo_llaveria.intSemestre=1
 GROUP BY
 tbluser.strName,
@@ -161,7 +161,7 @@ FROM
 		tbluserlista.idUser=tblventas_llaveria.intUser AND
 			tblventas_llaveria.dateFecha BETWEEN tblperiodo_llaveria.dateComienzo
 		AND tblperiodo_llaveria.dateFin
-		AND (:dates) BETWEEN tblperiodo_llaveria.dateComienzo
+		AND NOW()  BETWEEN tblperiodo_llaveria.dateComienzo
 		AND tblperiodo_llaveria.dateFin
 		AND tblperiodo_llaveria.intSemestre = 1
 		GROUP BY
@@ -192,7 +192,7 @@ LEFT JOIN (
 	AND tblproductos.intYear = tblperiodo_llaveria.intYear 
 	AND tblproductos.intCategoria > 9 
 	AND tblmetas_llaveria.intPeriodo = tblperiodo_llaveria.idPeriodo
-	AND (:dates)BETWEEN tblperiodo_llaveria.dateComienzo
+	AND NOW() BETWEEN tblperiodo_llaveria.dateComienzo
 	AND tblperiodo_llaveria.dateFin
 	AND tblperiodo_llaveria.intSemestre = 1
 	AND bonosSemestres.periodo = tblperiodo_llaveria.idPeriodo
@@ -203,9 +203,7 @@ AND uno.codProducto = dos.intProducto
 GROUP BY
 			todo.intUser
 ) as tres
-ON uno.intUser= tres.intUser
-
-";
+ON uno.intUser= tres.intUser";
 
 try {
 	$dbh = new PDO("mysql:host=$hostname_conexionmiura;dbname=$database_conexionmiura", $username_conexionmiura, $password_conexionmiura);	
@@ -213,7 +211,6 @@ try {
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$stmt = $dbh->prepare($sql);  
 	$stmt->bindParam("User", $_GET['almacen']);
-	$stmt->bindParam("dates", $_GET['date']);
 	$stmt->execute();
 	$aaData = $stmt->fetchAll(PDO::FETCH_OBJ);
 	$dbh = null;

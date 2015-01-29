@@ -75,6 +75,7 @@ tbluserlista.idUser=tblventas_llaveria.intUser AND
 tblmetas_llaveria.intUser=tbluserlista.idUser and
 tblventas_llaveria.intUser=tbluser.idUser AND
 tblventas_llaveria.intProducto=tblproductos.codProducto and
+tblproductos.intYear = tblperiodo_llaveria.intYear and
 tblproductos.codProducto=tblmetas_llaveria.intProducto and
 tblcategorias.idCategoria=8 AND
 tblproductos.intCategoria = tblcategorias.idCategoria AND
